@@ -1,53 +1,107 @@
 {% extends "template.html" %}
 
-<!--{% block head %}
-{% endblock %}-->
 {% block content %}
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-	<h1 class="h3 mb-0 text-gray-800">ToDo Breadcrumbs</h1>
-  <button id="btn-export" class="btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</button>
-	</div>
 
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary">Router Details</h6>
-		</div>
+		<h6 class="m-0 font-weight-bold text-primary">DataTable</h6>
+	</div>
 	<div class="card-body">
 		<div class="table-responsive">
 			<table class="table table-bordered nowrap" id="dataTable" width="100%" cellspacing="0">
+				{% if value == "datacenter"%}
 				<thead>
-					<tr>
-						<th>Device Series</th>
-						<th>Device Model</th>
-						<th>IP Address</th>
-						<th>Reservation Status</th>
-						<th>User</th>
-						<th>Release Date</th>
-					</tr>
-				</thead>
-				<tfoot>
-					<tr>
-						<th>Device Series</th>
-						<th>Device Model</th>
-						<th>IP Address</th>
-						<th>Reservation Status</th>
-						<th>User</th>
-						<th>Release Date</th>
-					</tr>
-				</tfoot>
-				<tbody>
-					{% for row in route %}
-					<tr>
-					<td>{{ row[0] }}</td>
-					<td>{{ row[1] }}</td>
-					<td>{{ row[2] }}</td>
-					<td>{{ row[3] }}</td>
-					<td>{{ row[4] }}</td>
-					<td>{{ row[5] }}</td>
-					</tr>
-					{% endfor %}
+	<tr>
+		<th>Datacenter</th>
+		<th>No. of ESXi</th>
+		<th>No. of VMs</th>
+	</tr>
+	</thead>
+	<tfoot>
+	<tr>
+<th>Datacenter</th>
+<th>No. of ESXi</th>
+<th>No. of VMs</th>
+</tr>
+</tfoot>
+<tbody>
+	{%for key,value in esxi.items()%}
+		<tr>
+			<td>{{ key }}</td>
+			<td>{{ value[0] }}</td>
+			<td>{{ value[1] }}</td>
+		</tr>
+	{%endfor%}
+</tbody>
+{%else %}
+	<thead>
+	<tr>
+	<th>vCenter IP</th>
+	<th>ESXi IP</th>
+	<th>Reachability</th>
+	<th>DataCenter</th>
+	<th>UCS Model</th>
+	<th>ESXi Version</th>
+	<th>Physical CPU</th>
+	<th>Virtual CPU</th>
+	<th>Memory(RAM)</th>
+	<th>Configured HDD</th>
+	<th>No. of VMs</th>
+	<th>VMs UP</th>
+	<th>VMs Down</th>
+	<th>Owner</th>
+	<th>CIMC IP</th>
+	<th>Comment</th>
 
-				</tbody>
+
+</tr></thead>
+<tfoot>
+<tr>
+<th>vCenter IP</th>
+<th>ESXi IP</th>
+<th>Reachability</th>
+<th>DataCenter</th>
+<th>UCS Model</th>
+<th>ESXi Version</th>
+<th>Physical CPU</th>
+<th>Virtual CPU</th>
+<th>Memory(RAM)</th>
+<th>Configured HDD</th>
+<th>No. of VMs</th>
+<th>VMs UP</th>
+<th>VMs Down</th>
+<th>Owner</th>
+<th>CIMC IP</th>
+<th>Comment</th>
+
+
+</tr></tfoot>
+
+<tbody>
+	{% for value in esxi %}
+<tr>
+	<td>{{ value[8]}}</td>
+	<td>{{ value[0] }}</td>
+	<td>{{ value[12] }}</td>
+	<td>{{ value[7] }}</td>
+	<td>{{ value[5] }}</td>
+	<td>{{ value[6] }}</td>
+	<td>{{ value[1] }}</td>
+	<td>{{ value[2] }}</td>
+	<td>{{ value[3] }}</td>
+	<td>{{ value[4] }}</td>
+	<td>{{ value[13] }}</td>
+	<td>{{ value[14] }}</td>
+	<td>{{ value[15] }}</td>
+	<td>{{ value[10] }}</td>
+	<td>{{ value[11] }}</td>
+	<td>{{ value[9] }}</td>
+</tr>
+{% endfor %}
+</tbody>
+
+{%endif%}
+
 			</table>
 		</div>
 	</div>
