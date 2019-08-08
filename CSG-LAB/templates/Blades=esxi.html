@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard</title>
+	<h3 align="center">Dashboard</h3>
+	<style>
+		body{
+			background-color: white;
+			background-position: center;
+			background-size: cover;
+			height: 90vh
+			}
+		div.div1{
+			width: 100%;
+			height:100%;
+			background-color: white;
+			text-align:left-center;
+			}
+		div.div2{
+			width: 100%;
+			height: 5%;
+			background-color: green;
+			text-align:left-center;
+			}
+		div.div3{
+		    width: 100;
+		    height: 1%;
+		    }
+		div.div4{
+		    width:100%;
+		    height:100%;
+		    background-color: black;
+		    padding: 2px;
+		    }
+		div.div41{
+		    float: left;
+		    width:20%;
+		    height:99%;
+		    background-color: lightgreen;
+		    padding: 2px;
+		    }
+		div.div42{
+		    float: left;
+		    width:0%;
+		    height:100%;
+		    background-color: white;
+		    padding: 2px;
+		    }
+		div.div43{
+		    float: left;
+		    width:79%;
+		    height:99%;
+		    background-color: white;
+		    padding: 2px;
+		    }
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			}
+		li {
+			display: inline;
+			float: left;
+			}
+		li a {
+			display: block;
+			padding-left: 10px;
+			padding-right: 10px;
+			padding-top: 6px;
+			text-decoration: none;
+			text-align: center;
+			font-size: 18px;
+			color:white
+			}
+		table{
+        	align: center;
+			border-collapse: collapse;
+			width: 100%;
+			}
+		.table, th, td{
+			width: 300px;
+			font-size: 18px;
+			text-align: center;
+			height: 5vh;
+			border: 1px solid #ddd;
+
+			}
+		.table, th{
+			background-color:#4CAF50;
+			color: white;
+			}
+		table tr:nth-child(even){background-color: #f2f2f2;}
+	</style>
+</head>
+<body>
+	<div class="div1">
+		<div class ="div2">
+			<ul>
+				<li><a href="Dashboard.html">Dashboard</a></li>
+  				<li><a href="Router.html">Router</a></li>
+  				<li><a href="Switch.html">Switch</a></li>
+  				<li><a href="Wireless.html">Wireless</a></li>
+				<li><a href="Nexus.html">Nexus</a></li>
+				<li><a href="DNAC.html">DNAC</a></li>
+                <li><a href="Blades.html">Blades</a></li>
+				<li><a href="Add Device.html">Add-Device</a></li>
+			</ul>
+		</div>
+		<div class="div3">
+
+		</div>
+		<div class="div4">
+			<div class="div41">
+				<table class="table1">
+					<tr><td>
+						<a href="Blades.html">All</a>
+						<input name="all" type="hidden" >
+					</td></tr>
+					<tr><td>
+						<a href="Dashboard.html">vCenter</a>
+						<input  name="vcenter" type="hidden" >
+					</td></tr>
+					<tr><td>
+						<a href="Dashboard.html">Datacenter</a>
+						<input  name="datacenter" type="hidden" >
+					</td></tr>
+					<tr><td>
+						<a href="Dashboard.html">ESXi/Blades</a>
+						<input  name="virtualmachine" type="hidden">
+					</td></tr>
+
+		    	</table>
+            </div>
+			<div class="div42">
+
+            </div>
+            <div class="div43">
+				<table class="table2" align="center">
+					{% for value in vm %}
+					<tr>ESXi: {{ value[6]}}</tr>
+					<tr>
+						<th>VMs</th>
+						<th>VM IP Address</th>
+						<th>Power State</th>
+						<th>UP Time</th>
+						<th>CPU</th>
+						<th>Memory</th>
+						<th>Hardisk</th>
+						<th>DataCenter</th>
+						<th>vCenter</th>
+					</tr>
+
+					<tr>
+						<td>{{ value[0] }}</td>
+						<td>{{ value[7] }}</td>
+						<td>{{ value[1] }}</td>
+						<td>{{ value[3] }}</td>
+						<td>{{ value[9] }}</td>
+						<td>{{ value[10] }}</td>
+						<td>{{ value[11] }}</td>
+						<td>{{ value[4] }}</td>
+						<td>{{ value[8] }}</td>
+					</tr>
+					{% endfor %}
+				</table>
+            </div>
+		</div>
+
+	</div>
+</body>
+</html>

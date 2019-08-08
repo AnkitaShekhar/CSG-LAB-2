@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+	<h3 align="center">Dashboard</h3>
+	<style>
+		body{
+			background-color: white;
+			background-position: center;
+			background-size: cover;
+			height: 90vh
+			}
+		div.div1{
+			width: 100%;
+			height:100%;
+			background-color: white;
+			text-align:left-center;
+			}
+		div.div2{
+			width: 100%;
+			height: 5%;
+			background-color: green;
+			text-align:left-center;
+			}
+		div.div3{
+		    width: 100;
+		    height: 1%;
+		    }
+		div.div4{
+		    width:100%;
+		    height:100%;
+		    padding: 2px;
+		    }
+		div.div41{
+		    float: left;
+		    width:20%;
+		    height:99%;
+		    background-color: lightgreen;
+		    padding: 2px;
+		    }
+		div.div42{
+		    float: left;
+		    width:0%;
+		    height:100%;
+		    background-color: white;
+		    padding: 2px;
+		    }
+		div.div43{
+		    float: left;
+		    width:79%;
+		    height:99%;
+		    background-color: white;
+		    padding: 2px;
+			page-break-inside:always;
+		    }
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			}
+		li {
+			display: inline;
+			float: left;
+			}
+		li a {
+			display: block;
+			padding-left: 10px;
+			padding-right: 10px;
+			padding-top: 6px;
+			text-decoration: none;
+			text-align: center;
+			font-size: 18px;
+			color:white
+			}
+		table{
+        	align: center;
+			border-collapse: collapse;
+			width: 100%;
+			page-break-inside:always;
+			}
+		tr   { page-break-inside:avoid;
+				page-break-after:always;
+			}
+		.table, th, td{
+			width: 300px;
+			font-size: 18px;
+			text-align: center;
+			height: 5vh;
+			border: 1px solid #ddd;
+
+			}
+		.table, th{
+			background-color:#4CAF50;
+			color: white;
+			}
+
+		table tr:nth-child(even){background-color: #f2f2f2;}
+		button{
+			border: none;
+			text-align: center;
+			text-decoration: none;
+			font-size: 16px;
+			background-color: none;
+			}
+		form{
+			align: center;
+			}
+		input[type=text] {
+  			width: 50%;
+  			padding: 10px 20px;
+  			margin: 6px 0;
+  			box-sizing: border-box;
+  			align: center;
+  			font-size: 16px;
+			}
+		select {
+			width: 20%;
+			font-size: 16px;
+			}
+		button{
+			background-color: #4CAF50;
+			cursor: pointer;
+			font-size: 16px;
+			text-align: center;
+  			text-decoration: none;
+			}
+	</style>
+</head>
+<body>
+	<div class="div1">
+		<div class ="div2">
+			<ul>
+				<li><a href="Dashboard.html">Dashboard</a></li>
+  				<li><a href="Router.html">Router</a></li>
+  				<li><a href="Switch.html">Switch</a></li>
+  				<li><a href="Wireless.html">Wireless</a></li>
+				<li><a href="DNAC">DNAC</a></li>
+                <li><a href="vCenter">Blades</a></li>
+                <li><a href="Nexus.html">Nexus</a></li>
+				<li><a href="Other">Other</a></li>
+			</ul>
+		</div>
+		<div class="div3">
+
+		</div>
+        <div class="div4">
+            <div class="div41">
+				<table>
+					<tr>
+						<ul >
+                    		<li><a href="/Other/adddevice">Add Device</a></li> <br>
+						</ul>
+					</tr>
+					<tr>
+						<ul>
+							<li><a href="/Other/deletedevice">Delete Device</a></li>
+						</ul>
+					</tr>
+					<tr>
+						<ul>
+							<li><a href="/Other/console">Console</a></li>
+
+						</ul>
+					</tr>
+				</table>
+            </div>
+			<div class="div42">
+
+            </div>
+			<div class="div43">
+				<h3 align="center">Add Device</h3>
+				<form action="" class="AddDevice" method="post">
+					<select name="topology" >
+						<option value="LAB">LAB</option>
+
+					</select>
+					<select name="Device Type" >
+						<option value="Router">Router</option>
+						<option value="Switch">Switch</option>
+						<option value="WLC">WLC</option>
+						<option value="Nexus">Nexus</option>
+					</select> <br>
+
+					<input type="text" placeholder="Console IP" name="ipaddress" value="{{ request.form.ipaddress }}">
+					<input type="text" placeholder="Port" name="port" value="{{ request.form.port }}"> <br>
+
+					<input type="text" placeholder="Username" name="username" value="{{ request.form.username }}"> <br>
+					<input type="text" placeholder="Password" name="password" value="{{ request.form.password }}"> <br>
+					<input type="text" placeholder="Enable Password" name="enpass" value="{{ request.form.enpass }}"> <br>
+
+					<button value="Submit">Submit</button>
+				</form>
+				{% with messages = get_flashed_messages() %}
+   					{% if messages %}
+      					{% for message in messages %}
+         					{{ message }}
+      					{% endfor %}
+   					{% endif %}
+				{% endwith %}
+			</div>
+
+    </div>
+
+</body>
+</html>

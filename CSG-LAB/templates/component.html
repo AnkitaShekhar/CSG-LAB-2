@@ -1,0 +1,174 @@
+	<!DOCTYPE html>
+<html>
+<head>
+	<title>DNAC</title>
+	<h3 align="center">DNAC</h3>
+
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
+	<script>
+		$(document).ready(function() {
+    	$('#dtBasicExample').DataTable( {
+        "pagingType": "full_numbers"
+    	} );
+	</script>
+
+	<style>
+		body{
+			background-color: white;
+			background-position: center;
+			background-size: cover;
+			height: 90vh
+			}
+		div.div1{
+			width: 100%;
+			height:100%;
+			background-color: white;
+			text-align:left-center;
+			}
+		div.div2{
+			width: 100%;
+			height: 5%;
+			background-color: green;
+			text-align:left-center;
+			}
+		div.div3{
+		    width: 100;
+		    height: 1%;
+		    }
+		div.div4{
+		    width:100%;
+		    height:100%;
+		    background-color: black;
+		    padding: 2px;
+		    }
+		div.div41{
+		    float: left;
+		    width:15%;
+		    height:99%;
+		    background-color: lightgreen;
+		    padding: 2px;
+		    }
+		div.div42{
+		    float: left;
+		    width:0%;
+		    height:100%;
+		    background-color: white;
+		    padding: 2px;
+		    }
+		div.div43{
+		    float: left;
+		    width:84%;
+		    height:99%;
+		    background-color: white;
+		    padding: 2px;
+		    }
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			}
+		li {
+			display: inline;
+			float: left;
+			font-size:20px;
+			}
+		li a {
+			display: block;
+			padding-left: 10px;
+			padding-right: 10px;
+			padding-top: 6px;
+			text-decoration: none;
+			text-align: center;
+			font-size: 18px;
+			color:white
+			}
+		table{
+        	align: center;
+			border-collapse: collapse;
+			width: 100%;
+			page-break-after:always;
+			}
+		.table, th, td{
+			width: 300px;
+			font-size: 16px;
+			text-align: center;
+			height: 4vh;
+			border: 1px solid #ddd;
+
+			}
+		table tr{
+			page-break-inside:avoid;
+			page-break-after:auto;
+		}
+		.table, th{
+			background-color:#4CAF50;
+			color: white;
+			}
+		table tr:nth-child(even){background-color: #f2f2f2;}
+	</style>
+</head>
+<body>
+	<div class="div1">
+		<div class ="div2" background-color="black">
+			<ul>
+				<li><a href="Dashboard.html">Dashboard</a></li>
+  				<li><a href={{ page[0] }}>Router</a></li>
+  				<li><a href={{ page[1] }}>Switch</a></li>
+  				<li><a href={{ page[2] }}>Wireless</a></li>
+				<li><a href={{ page[3] }}>Nexus</a></li>
+                <li><a href="DNAC">DNAC</a></li>
+                <li><a href="vCenter">Blades</a></li>
+				<li><a href="Other">Other</a></li>
+			</ul>
+		</div>
+        <div class="div3">
+
+        </div>
+        <div class="div4">
+            <div class="div41">
+				<table class="table1">
+					{% for row in comp_table %}
+					<tr>
+						<td><a class="component" href="/DNAC/{{ row }}">{{ row }}</a></td>
+					</tr>
+					{% endfor %}
+		    	</table>
+            </div>
+            <div class="div42">
+
+            </div>
+            <div class="div43">
+				<table id="dtBasicExample" class="table2" align="center">
+					<thead>
+					<tr>
+						<th>Device Family</th>
+						<th>Product ID</th>
+						<th>IP Address</th>
+						<th>Device Type</th>
+						<th>Ping</th>
+						<th>Telnet</th>
+						<th>SNMP</th>
+					</tr>
+					</thead>
+					<tbody>
+					{% for value in data %}
+					<tr>
+						<td>{{ value[0] }}
+						<td>{{ value[1] }}</td>
+						<td>{{ value[2] }}</td>
+						<td>{{ value[3] }}</td>
+						<td>{{ value[4] }}</td>
+						<td>{{ value[5] }}</td>
+						<td>{{ value[6] }}</td>
+					</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+            </div>
+        </div>
+	</div>
+</body>
+</html>

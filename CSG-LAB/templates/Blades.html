@@ -1,0 +1,65 @@
+{% extends "template.html" %}
+
+{% block content %}
+<div class="card shadow mb-4">
+	<div class="card-header py-3">
+		<h6 class="m-0 font-weight-bold text-primary">DataTable</h6>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>vCenter IP</th>
+						<th>DataCenter</th>
+						<th>ESXi IP</th>
+						<th>VM Name</th>
+						<th>VM IP Address</th>
+						<th>VM Power State</th>
+						<th>VM UP Time</th>
+						<th>VM CPU Allocated</th>
+						<th>VM Memory(RAM) Allocated</th>
+						<th>VM Hardisk Allocated</th>
+						<th>Comment</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>vCenter IP</th>
+						<th>DataCenter</th>
+						<th>ESXi IP</th>
+						<th>VM Name</th>
+						<th>VM IP Address</th>
+						<th>VM Power State</th>
+						<th>VM UP Time</th>
+						<th>VM CPU Allocated</th>
+						<th>VM Memory(RAM) Allocated</th>
+						<th>VM Hardisk Allocated</th>
+						<th>Comment</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					{% for value in vm %}
+					<tr>
+						<td>{{ value[8] }}</td>
+						<td>{{ value[7] }}</td>
+						<td>{{ value[6]}}</td>
+						<td>{{ value[0] }}</td>
+						<td>{{ value[1] }}</td>
+						<td>{{ value[3] }}</td>
+						<td>{{ value[4] }}</td>
+						<td>{{ value[9] }}</td>
+						<td>{{ value[10] }}</td>
+						<td>{{ value[11] }}</td>
+						<th>Comment</th>
+
+
+					</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

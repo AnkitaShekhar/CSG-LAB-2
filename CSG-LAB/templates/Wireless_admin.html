@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard</title>
+	<h3 align="center">Dashboard</h3>
+	<style>
+		body{
+			background-color: white;
+			background-position: center;
+			background-size: cover;
+			height: 90vh
+			}
+		div.div1{
+			width: 100%;
+			height:100%;
+			background-color: white;
+			text-align:left-center;
+			}
+		div.div2{
+			width: 100%;
+			height: 5%;
+			background-color: green;
+			text-align:left-center;
+			}
+		div.div3{
+			width: 100%;
+			height: 1%;
+		}
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			}
+		li {
+			display: inline;
+			float: left;
+			}
+		li a {
+			display: block;
+			padding-left: 10px;
+			padding-right: 10px;
+			padding-top: 6px;
+			text-decoration: none;
+			text-align: center;
+			font-size: 18px;
+			color:white
+			}
+		 table{
+        	align: center;
+			border-collapse: collapse;
+			width: 100%;
+
+			}
+		.table, th, td{
+			width: 300px;
+			font-size: 18px;
+			text-align: center;
+			height: 5vh;
+			border: 1px solid #ddd;
+
+			}
+		.table, th{
+			background-color:#4CAF50;
+			color: white;
+			}
+		table tr:nth-child(even){background-color: #f2f2f2;}
+
+		h3{
+			text-align:center;
+			}
+
+	</style>
+</head>
+<body>
+	<div class="div1">
+		<div class ="div2">
+			<ul>
+				<li><a href="Dashboard.html">Dashboard</a></li>
+  				<li><a href={{ page[0] }}>Router</a></li>
+  				<li><a href={{ page[1] }}>Switch</a></li>
+  				<li><a href={{ page[2] }}>Wireless</a></li>
+				<li><a href={{ page[3] }}>Nexus</a></li>
+				<li><a href="DNAC">DNAC</a></li>
+                <li><a href="vCenter">Blades</a></li>
+				<li><a href="Other">Other</a></li>
+			</ul>
+		</div>
+        <div class="div3">
+
+        </div>
+        <div class="div4">
+            <table>
+			<tr>
+				<th>Device Series</th>
+				<th>Device Model</th>
+				<th>IP Address</th>
+				<th>Reservation Status</th>
+				<th>User</th>
+				<th>Release Date</th>
+				<th>Action</th>
+
+			</tr>
+			{% for row in wireless %}
+			<tr>
+				<td>{{ row[0] }}</td>
+				<td>{{ row[1] }}</td>
+				{% if row[10] == "Unreachable" %}
+					<td bgcolor="red">{{ row[2] }}</td>
+				{%else%}
+					<td>{{ row[2] }}</td>
+				{%endif%}
+				{%if row[4] == None %}
+					<td>Free</td>
+				{% else %}
+					<td>{{ row[3]}}</td>
+				{%endif%}
+
+				<form action="{{url_for('router_admin') }}" method="post">
+					{%if row[4] == "None" %}
+                		<td><input type={{ row[6] }} name="userid" value="{{request.form.userid}}"></td>
+					{% else %}
+						<td>{{ row[4] }}</td>
+					{%endif%}
+
+					<td>{{ row[5] }}</td>
+					<td>
+							<select name="Action">
+    						<option value="Assign" {{ row[7] }}>Assign</option>
+							<option value="Extend" {{ row[8] }}>Extend</option>
+    						<option value="Release" {{ row[9] }}>Release</option>
+							<option value="Ping">Ping</option>
+  							</select>
+						<input id="assignid" name="assignid" type="hidden" value="{{ row[2] }}">
+						<button type="submit">Submit</button>
+
+					</td>
+				</form>
+			</tr>
+			{% endfor %}
+		    </table>
+        </div>
+	</div>
+</body>
+</html>

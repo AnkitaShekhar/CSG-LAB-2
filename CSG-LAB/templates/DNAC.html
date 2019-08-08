@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DNAC</title>
+	<h3 align="center">DNAC</h3>
+	<style>
+		body{
+			background-color: white;
+			background-position: center;
+			background-size: cover;
+			height: 90vh
+			}
+		div.div1{
+			width: 100%;
+			height:100%;
+			background-color: white;
+			text-align:left-center;
+			}
+		div.div2{
+			width: 100%;
+			height: 5%;
+			background-color: green;
+			text-align:left-center;
+			}
+		div.div3{
+		    width: 100;
+		    height: 1%;
+		    }
+		div.div4{
+		    width:100%;
+		    height:100%;
+		    padding: 2px;
+		    }
+		div.div41{
+		    float: left;
+		    width:15%;
+		    height:99%;
+		    background-color: lightgreen;
+		    padding: 2px;
+		    }
+		div.div42{
+		    float: left;
+		    width:0%;
+		    height:100%;
+		    background-color: white;
+		    padding: 2px;
+		    }
+		div.div43{
+		    float: left;
+		    width:84%;
+		    height:70%;
+		    background-color: white;
+		    padding: 2px;
+		    }
+		div.div44{
+		    float: left;
+		    width:84%;
+		    height:15%;
+		    padding: 2px;
+		    }
+		div.div45{
+		    float: left;
+		    width:84%;
+		    height:3%;
+		    padding: 2px;
+		    background-color: orange;
+		    }
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			}
+		li {
+			display: inline;
+			float: left;
+			font-size:20px;
+			}
+		li a {
+			display: block;
+			padding-left: 10px;
+			padding-right: 10px;
+			padding-top: 6px;
+			text-decoration: none;
+			text-align: center;
+			font-size: 18px;
+			color:white
+			}
+		table{
+        	align: center;
+			border-collapse: collapse;
+			width: 100%;
+			page-break-inside: auto;
+			}
+		.table, th, td{
+			width: 300px;
+			font-size: 16px;
+			text-align: center;
+			height: 4vh;
+			border: 1px solid #ddd;
+
+			}
+		.table, th{
+			background-color:#4CAF50;
+			color: white;
+			}
+		table tr:nth-child(even){background-color: #f2f2f2;}
+	</style>
+</head>
+<body>
+	<div class="div1">
+		<div class ="div2">
+			<ul>
+				<li><a href="Dashboard.html">Dashboard</a></li>
+  				<li><a href={{ page[0] }}>Router</a></li>
+  				<li><a href={{ page[1] }}>Switch</a></li>
+  				<li><a href={{ page[2] }}>Wireless</a></li>
+				<li><a href={{ page[3] }}>Nexus</a></li>
+                <li><a href="DNAC">DNAC</a></li>
+                <li><a href="vCenter">Blades</a></li>
+				<li><a href="Other">Other</a></li>
+			</ul>
+		</div>
+        <div class="div3">
+
+        </div>
+        <div class="div4">
+            <div class="div41">
+				<table class="table1">
+					{% for row in comp_table %}
+					<tr>
+						<td><a class="component" href="/DNAC/{{ row }}">{{ row }}</a></td>
+					</tr>
+					{% endfor %}
+		    	</table>
+            </div>
+            <div class="div42">
+
+            </div>
+			<div class="div44">
+				<table class="table1" align="center">
+					<tr>
+						<th>DNAC</th>
+						<th>Total</th>
+						<th>Real</th>
+						<th>VIRL</th>
+						<th>Sapro</th>
+						<th>Virtual</th>
+
+					</tr>
+					<tr>
+						<td>DNAC-TOP-1</td>
+						<td><a class="DNAC-TOP-1" href="/DNAC/set1-total">{{ dnac[0] }}</a></td>
+
+						<td><a class="DNAC-TOP-1" href="/DNAC/set1-Real">{{ dnac[2] }}</a></td>
+						<td><a class="DNAC-TOP-1" href="/DNAC/set1-VIRL">{{ dnac[3] }}</a></td>
+						<td><a class="DNAC-TOP-1" href="/DNAC/set1-Sapro">{{ dnac[4] }}</a></td>
+						<td><a class="DNAC-TOP-1" href="/DNAC/set1-Virtual">{{ dnac[5] }}</a></td>
+					</tr>
+					<tr>
+						<td>DNAC-TOP-2</td>
+						<td><a class="DNAC-TOP-2" href="/DNAC/set2-total">{{ dnac2[0] }}</a></td>
+
+						<td><a class="DNAC-TOP-2" href="/DNAC/set2-Real">{{ dnac2[2] }}</a></td>
+						<td><a class="DNAC-TOP-2" href="/DNAC/set2-VIRL">{{ dnac2[3] }}</a></td>
+						<td><a class="DNAC-TOP-2" href="/DNAC/set2-Sapro">{{ dnac2[4] }}</a></td>
+						<td><a class="DNAC-TOP-2" href="/DNAC/set2-Virtual">{{ dnac2[5] }}</a></td>
+					</tr>
+				</table>
+			</div>
+			<div class="div45" align="center">
+				<a class="DNAC-TOP-2" href="/DNAC/diff">Diff</a>
+			</div>
+            <div class="div43" >
+				{% if value == "set" %}
+					<table class="table2" align="center">
+					<tr>
+						<th>Component</th>
+						<th>Device Type</th>
+						<th>IP Address</th>
+						<th>Ping Status</th>
+					</tr>
+					{% for value in setdata %}
+					<tr>
+						<td>{{ value[0] }}
+						<td>{{ value[1] }}</td>
+						<td>{{ value[2] }}</td>
+						<td>{{ value[3] }}</td>
+
+					</tr>
+					{% endfor %}
+				</table>
+				{%elif value == "diff" %}
+				<table class="table2" align="center">
+					<tr>
+						<th rowspan="2">Component</th>
+						<th colspan="5">DNAC-SET-1</th>
+						<th colspan="5">DNAC-SET-2</th>
+					</tr>
+
+					<tr>
+						<th>Total</th>
+						<th>Real</th>
+						<th>VIRL</th>
+						<th>Sapro</th>
+						<th>Virtual</th>
+
+						<th>Total</th>
+						<th>Real</th>
+						<th>VIRL</th>
+						<th>Sapro</th>
+						<th>Virtual</th>
+					</tr>
+
+				{% for key, value in comp_wise.items() %}
+					<tr>
+						<td>{{ key }}</td>
+						<td bgcolor="lightblue">{{ value[0] }}</td>
+						<td bgcolor="lightblue">{{ value[1] }}</td>
+						<td bgcolor="lightblue">{{ value[2] }}</td>
+						<td bgcolor="lightblue">{{ value[3] }}</td>
+						<td bgcolor="lightblue">{{ value[4] }}</td>
+
+						<td bgcolor="orange">{{ value[5] }}</td>
+						<td bgcolor="orange">{{ value[6] }}</td>
+						<td bgcolor="orange">{{ value[7] }}</td>
+						<td bgcolor="orange">{{ value[8] }}</td>
+						<td bgcolor="orange">{{ value[9] }}</td>
+					</tr>
+
+				{% endfor %}
+					</table>
+				{% else %}
+				<table class="table2" align="center">
+					<tr>
+						<th>Component</th>
+						<th>Device Count</th>
+						<th>Ping Status</th>
+						<th>SNMP Status</th>
+						<th>Telnet Status</th>
+					</tr>
+					{% for key, value in comp_wise.items() %}
+					<tr>
+						<td>{{ key }}
+						<td>{{ value[0] }}</td>
+						<td>{{ value[1] }}</td>
+						<td>{{ value[2] }}</td>
+						<td>{{ value[3] }}</td>
+					</tr>
+					{% endfor %}
+				</table>
+				{%endif%}
+            </div>
+        </div>
+	</div>
+</body>
+</html>

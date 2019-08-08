@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard</title>
+	<h3 align="center">Dashboard</h3>
+	<style>
+		body{
+			background-color: white;
+			background-position: center;
+			background-size: cover;
+			height: 90vh
+			}
+		div.div1{
+			width: 100%;
+			height:100%;
+			background-color: white;
+			text-align:left-center;
+			}
+		div.div2{
+			width: 100%;
+			height: 5%;
+			background-color: green;
+			text-align:left-center;
+			}
+		div.div3{
+		    width: 100;
+		    height: 1%;
+		    }
+		div.div4{
+		    width:100%;
+		    height:100%;
+		    padding: 2px;
+		    }
+		div.div41{
+		    float: left;
+		    width:10%;
+		    height:99%;
+		    background-color: lightgreen;
+		    padding: 2px;
+		    }
+		div.div42{
+		    float: left;
+		    width:0%;
+		    height:100%;
+		    background-color: white;
+		    padding: 2px;
+		    }
+		div.div43{
+		    float: left;
+		    width:89%;
+		    height:99%;
+		    background-color: white;
+		    padding: 2px;
+			page-break-inside:always;
+		    }
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			}
+		li {
+			display: inline;
+			float: left;
+			}
+		li a {
+			display: block;
+			padding-left: 10px;
+			padding-right: 10px;
+			padding-top: 6px;
+			text-decoration: none;
+			text-align: center;
+			font-size: 18px;
+			color:white
+			}
+		table{
+        	align: center;
+			border-collapse: collapse;
+			width: 100%;
+			page-break-inside:always;
+			}
+		tr   { page-break-inside:avoid;
+				page-break-after:always;
+			}
+		.table, th, td{
+			width: 300px;
+			font-size: 18px;
+			text-align: center;
+			height: 5vh;
+			border: 1px solid #ddd;
+
+			}
+		.table, td{
+			width: 300px;
+			font-size: 14px;
+			text-align: center;
+			height: 5vh;
+			border: 1px solid #ddd;
+
+			}
+		.table, th{
+			background-color:#4CAF50;
+			color: white;
+
+			}
+
+		table tr:nth-child(even){background-color: #f2f2f2;}
+		button{
+			border: none;
+			text-align: center;
+			text-decoration: none;
+			font-size: 16px;
+			background-color: none;
+			}
+	</style>
+</head>
+<body>
+	<div class="div1">
+		<div class ="div2">
+			<ul>
+				<li><a href="Dashboard.html">Dashboard</a></li>
+  				<li><a href={{ page[0] }}>Router</a></li>
+  				<li><a href={{ page[1] }}>Switch</a></li>
+  				<li><a href={{ page[2] }}>Wireless</a></li>
+				<li><a href={{ page[3] }}>Nexus</a></li>
+				<li><a href="DNAC">DNAC</a></li>
+                <li><a href="vCenter">Blades</a></li>
+				<li><a href="Other">Other</a></li>
+			</ul>
+		</div>
+		<div class="div3">
+
+		</div>
+		<div class="div4">
+			<div class="div41">
+				<table>
+					<tr>
+						<td><a class="component" href="/vCenter/vCenterdata">vCenter</a></td>
+					</tr>
+					<tr>
+						<td><a class="component" href="/vCenter/datacenter">Datacenter</a></td>
+					</tr>
+					<tr>
+						<td><a class="component" href="/vCenter/esxi">UCS</a></td>
+					</tr>
+					<tr>
+						<td><a class="component" href="/vCenter/vmdata">VMs</a></td>
+					</tr>
+				</table>
+            </div>
+			<div class="div42">
+
+            </div>
+            <div class="div43" id="output_div">
+				<table class="table2" align="center">
+					<tr>
+						<th>IP Address</th>
+						<th>CPU</th>
+						<th>vCPU</th>
+						<th>Memory</th>
+						<th>Hardisk</th>
+						<th>Model</th>
+						<th>ESXi Version</th>
+						<th>DataCenter</th>
+						<th>vCenter</th>
+					</tr>
+					{% for value in esxi %}
+					<tr>
+						<td>{{ value[0] }}</td>
+						<td>{{ value[1] }}</td>
+						<td>{{ value[2] }}</td>
+						<td>{{ value[3] }}</td>
+						<td>{{ value[4] }}</td>
+						<td>{{ value[5] }}</td>
+						<td>{{ value[6] }}</td>
+						<td>{{ value[7] }}</td>
+						<td>{{ value[8]}}</td>
+					</tr>
+					{% endfor %}
+				</table>
+            </div>
+
+		</div>
+
+	</div>
+</body>
+</html>

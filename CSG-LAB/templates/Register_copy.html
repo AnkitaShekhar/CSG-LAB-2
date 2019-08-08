@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign-up</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+<head>
+<body>
+
+	<div class="login-page">
+	<div class="form">
+		<form action="" class="register-form" method="post" >
+		<input type="text" placeholder="Name" name="name", value="{{request.form.name}}">
+		<input type="text" placeholder="Last Name" name="lname", value="{{request.form.lname}}">
+		<input type="email" placeholder="Email Id" name="email", value="{{request.form.email}}">
+		<input type="text" placeholder="Password" name="password" value="{{request.form.password}}"> <br>
+		<button value="Register">Create</button>
+		<p class="message">Already Registered? <a href="login">Login</a>
+		</p>
+		</form>
+		{% if error %}
+		<p class="error"><strong></strong>{{ error }}</p>
+		{% endif %}
+	</div>
+	</div>
+</body>
+</html>

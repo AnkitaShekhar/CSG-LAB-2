@@ -1,0 +1,9 @@
+import email.message
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.encoders import encode_base64
+from email.message import Message
+
+
+html = """\

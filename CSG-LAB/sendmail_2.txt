@@ -1,0 +1,17 @@
+"""
+
+msg = MIMEText(html, 'html', _charset='utf-8') 
+assert msg['Content-Transfer-Encoding'] == 'base64'
+
+SERVER = "localhost"
+FROM = "dnaclab-support-blr@cisco.com"
+TO = "karachan@cisco.com,cmadraha@cisco.com,nanramas@cisco.com"
+msg['Subject'] = "DNAC Regression Device Status"
+msg['From'] = FROM
+msg['To'] = TO
+
+server = smtplib.SMTP(SERVER)
+server.sendmail(FROM, TO.split(','), msg.as_string())
+print "Successfully sent email"
+server.quit()
+
