@@ -17,7 +17,7 @@ class vcenter_db():
     def get_vm(self, con):
         cur = con.cursor()
         print("Fetching VM data")
-        cur.execute("select virtualmachine, ipaddress, guestos, powerstate, uptime, datastore, esxi, datacenter, vcenter, cpu, memorey, hardisk from datacenter")
+        cur.execute("select virtualmachine, ipaddress, guestos, powerstate, uptime, datastore, esxi, datacenter, vcenter, cpu, memorey, hardisk, comment from datacenter")
         newlist = [row for row in list(cur)]
 
 
@@ -45,7 +45,7 @@ class vcenter_db():
     def get_esxi(self, con):
         cur = con.cursor()
         print("Fetching esxi data")
-        cur.execute("select DISTINCT esxi, bladecpu, bladevcpu, bladememory, bladehardisk, blademodel, esxiversion, datacenter, vcenter from datacenter")
+        cur.execute("select DISTINCT esxi, bladecpu, bladevcpu, bladememory, bladehardisk, blademodel, esxiversion, datacenter, vcenter, owner, cimcip, comment, bladereachability from datacenter")
         newlist = [row for row in list(cur)]
 
         newesxilist = []
@@ -152,8 +152,6 @@ class vcenter_db():
         print("Fetching data for datacenter")
         cur.execute('select DISTINCT datacenter from datacenter')
 
-
-
         print()
         dcdata = [value[0] for value in cur]
         print(dcdata)
@@ -161,20 +159,13 @@ class vcenter_db():
         tmplist = []
         for value in dcdata:
             cur = con.cursor()
-            cur.execute('select count(esxi), count(virtualmachine), vcenter from datacenter where datacenter=?', [value])
+            cur.execute('select count(DISTINCT esxi), count(virtualmachine) from datacenter where datacenter=?', [value])
             tmp1 = []
             for row in cur:
-                tmp1.append(row)
-            print(tmp1)
+                for col in row:
+                    tmp1.append(col)
+                dclist.update({value:tmp1})
+            print(dclist)
 
-            tmp2 = []
-            for row in tmp1:
-                tmp2.append(row)
-            print(tmp2)
 
-            tmplist.append(value)
-            print(tmplist + tmp)
-            print(tmplist)
-            #dclist.append( list(value) + list(cur))
-            print(tmplist)
         return dclist

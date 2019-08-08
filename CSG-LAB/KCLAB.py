@@ -56,6 +56,14 @@ def before_request():
         g.user = session['user']
         g.role = session['role']
 
+        obj_session = class_database.getcredentials()
+        con = obj_session.connectdb()
+        name = obj_session.get_name(con, g.user)
+        g.name = name[0]
+        g.lastname = name[1]
+        print(g.name, g.lastname)
+
+
 """New User Registration"""
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -104,19 +112,38 @@ def dashboard():
 
     if g.user and g.role == 'admin':
         page_admin = ["Router_admin.html", "Switch_admin.html", "Wireless_admin.html", "Nexus_admin.html"]
-        return render_template("Dashboard.html", Dash=dict_dash, dnac=dnac, page=page_admin,vcenter=vcenter)
+        return render_template("Dashboard.html", Dash=dict_dash, dnac=dnac, page=page_admin, vcenter=vcenter)
     else:
         page = ["Router.html", "Switch.html", "Wireless.html", "Nexus.html"]
-        return render_template("Dashboard.html", Dash=dict_dash, dnac=dnac, page=page,vcenter=vcenter)
+        return render_template("Dashboard.html", Dash=dict_dash, dnac=dnac, page=page, vcenter=vcenter)
 
 """LAB: Router data"""
 @app.route('/Router.html', methods=['GET', 'POST'])
 def router():
 
+    page_admin = ["Router_admin.html", "Switch_admin.html", "Wireless_admin.html", "Nexus_admin.html"]
+
     Obj_Router = devices_db.devices()
     conn = Obj_Router.connectdb()
     cur = Obj_Router.get_router_data(conn)
     page = ["Router.html", "Switch.html", "Wireless.html", "Nexus.html"]
+
+    if g.user and g.role is not "admin":
+        page = ["Router.html", "Switch.html", "Wireless.html", "Nexus.html"]
+        return render_template("Router.html", route=cur, page=page)
+    else:
+        return redirect(url_for('router_admin'))
+
+@app.route('/Router/search', methods=['GET', 'POST'])
+def search():
+    #print(name)
+    print(request.form['search'])
+    obj_search = devices_db.devices()
+    conn = obj_search.connectdb()
+    cur = obj_search.getsearch(conn, request.form['search'])
+
+    page = ["Router.html", "Switch.html", "Wireless.html", "Nexus.html"]
+    page_admin = ["Router_admin.html", "Switch_admin.html", "Wireless_admin.html", "Nexus_admin.html"]
     if g.user and g.role is not "admin":
         return render_template("Router.html", route=cur, page=page)
     else:
@@ -600,6 +627,16 @@ def blades_name(name):
             else:
                 return render_template("ESXi_data.html", esxi=esxidata, page=page)
 
+        elif name == "datacenter" and request.method == 'GET':
+            print("Data for: " + name)
+            Obj_get_dc = upd_datacenter.vcenter_db()
+            conn = Obj_get_dc.connectdb()
+            esxidata = Obj_get_dc.dc_data(conn)
+            if g.role == "admin":
+                return render_template("ESXi_data.html", esxi=esxidata, page=page_admin, value="datacenter")
+            else:
+                return render_template("ESXi_data.html", esxi=esxidata, page=page, value = "datacenter")
+
 
         return render_template("Blades.html", mydict=mydict, name=name, length=dictlen)
 
@@ -723,5 +760,6 @@ def other_name(name):
         else:
             return render_template("deletedevice.html")
 
+
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0',port=2020)
+    app.run(debug=True, host='0.0.0.0')

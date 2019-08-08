@@ -35,3 +35,18 @@ class credentials_database():
         return output
 
 
+class getcredentials():
+    def connectdb(self):
+        con = sqlite3.connect("KCLAB.db")
+        return con
+
+    def get_name(self, con, mailid):
+        cur = con.cursor()
+        print("Fetching Name & Surname ")
+        output = cur.execute("select name, lastname from Credentials where mail=?", [mailid])
+        name = []
+        for val in output:
+            name.append(val[0])
+            name.append(val[1])
+        print(name)
+        return name

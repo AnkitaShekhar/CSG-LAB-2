@@ -163,3 +163,11 @@ class devices():
                            'sum(case when rvsv = "Virtual" then 1 else 0 end)'
                            'from DEVICES where topology="DNAC-TOP-2" AND component=?', [component])
         return dnac
+
+    def getsearch(self, con, search):
+        print("Fetching Search..")
+        value = "%" + search + "%"
+        cur = con.cursor()
+        dnac = cur.execute('select deviceseries, productid, ipaddress, status, user, releasedate from DEVICES where '
+                           'deviceseries like ? or productid like ? or ipaddress like ? or status like ? or user like ? or releasedate like ?', [value, value, value, value, value, value])
+        return dnac
