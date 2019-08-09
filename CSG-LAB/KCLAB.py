@@ -64,6 +64,14 @@ def before_request():
         session['f_name']= f_name
         session['l_name']= l_name
         #print(g.name, g.lastname)
+        ##setting DNAC components as session variable
+        Obj_get_componet = devices_db.devices()
+        conn = Obj_get_componet.connectdb()
+        dnac_component = Obj_get_componet.get_dnac_component(conn)
+        new_dnac_comp = [row[0] for row in dnac_component]
+
+        session['comp_table'] = new_dnac_comp
+
 
 
 """New User Registration"""
