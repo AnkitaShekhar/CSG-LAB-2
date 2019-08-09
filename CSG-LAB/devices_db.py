@@ -113,10 +113,27 @@ class devices():
         return dnac.fetchone()
 
     def get_component_data(self, con, component):
-        cur = con.cursor()
-        print("Fetching DNAC Component: " + component +"data")
-        cur.execute('select devicetype, productid, ipaddress, rvsv, reachability, telnetstatus, snmpstatus from DEVICES where component=? AND topology="DNAC-TOP-1"', [component])
-        return list(cur)
+        print(component)
+        cur = con.cursor()
+        print("Fetching DNAC Component: " + component +" data")
+        cur.execute('select devicetype, productid, ipaddress, rvsv, reachability, telnetstatus, snmpstatus from DEVICES where component=? AND topology="DNAC-TOP-1"', [component])
+        tmp = []
+        data = []
+        for val1 in cur:
+            tmp.append(list(val1))
+            data.append(tmp)
+        print(tmp)
+        return tmp
+
+    def get_component_data2(self, con, component):
+        cur = con.cursor()
+        print("Fetching DNAC Component: " + component +"data")
+        cur.execute('select devicetype, productid, ipaddress, rvsv, reachability, telnetstatus, snmpstatus from DEVICES where component=? AND topology="DNAC-TOP-2"', [component])
+        tmp = []
+        data = []
+        for val1 in cur:
+            tmp.append(list(val1))
+        print(tmp)
 
 
     def get_set_data(self, con, component):
