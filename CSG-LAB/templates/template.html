@@ -18,7 +18,11 @@
   <!-- Custom styles for this page -->
 	<link href="{{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+<style>
+	table thead tr th, table tfoot tr th{
+		text-align:center;
+	}
+	</style>
 {% block scripts %}
 {% endblock %}
 </head>
@@ -81,15 +85,17 @@
 					<i class="fas fa-fw fa-wrench"></i>
 					<span>DNAC</span>
 				</a>
-				<!--<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+				<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Custom Utilities:</h6>
-						<a class="collapse-item" href="utilities-color.html">Colors</a>
-						<a class="collapse-item" href="utilities-border.html">Borders</a>
-						<a class="collapse-item" href="utilities-animation.html">Animations</a>
-						<a class="collapse-item" href="utilities-other.html">Other</a>
+						{% set components = session['comp_table'] %}
+							<script> console.log(components);</script>
+							{% for row in components %}
+						<a class="collapse-item component" href="/DNAC/{{ row }}">{{ row }}</a>
+						{% endfor %}
+						<!--<a class="collapse-item" href="DNAC">DNAC Dashboard</a>-->
 					</div>
-				</div>-->
+				</div>
 			</li>
 
 			<!-- Nav Item - Blades Collapse Menu -->
