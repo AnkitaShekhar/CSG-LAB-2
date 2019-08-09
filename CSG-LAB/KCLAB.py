@@ -554,6 +554,19 @@ def dnac_component(component):
             dnac_component = Obj_get_componet.get_dnac_component(conn)
             new_dnac_comp = [row[0] for row in dnac_component]
             comp_data = Obj_get_componet.get_component_data(conn, component)
+            comp_data2 = Obj_get_componet.get_component_data2(conn, component)
+
+            for value1 in comp_data:
+                #print(value)
+                for value2 in comp_data2:
+                    if value1[2] == value2[2]:
+                        value1.append(value2[4])
+                        value1.append(value2[5])
+                        value1.append(value2[6])
+                        value1.append(component)
+                        print(value1)
+                        break
+                        
             if g.role == "admin":
                 return render_template("component.html", comp_table=new_dnac_comp, data=comp_data, page=page_admin)
             else:
