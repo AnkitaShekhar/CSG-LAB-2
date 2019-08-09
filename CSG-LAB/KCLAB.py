@@ -59,9 +59,11 @@ def before_request():
         obj_session = class_database.getcredentials()
         con = obj_session.connectdb()
         name = obj_session.get_name(con, g.user)
-        g.name = name[0]
-        g.lastname = name[1]
-        print(g.name, g.lastname)
+        f_name = str(name[0]).encode("utf-8")
+        l_name = str(name[1]).encode("utf-8")
+        session['f_name']= f_name
+        session['l_name']= l_name
+        #print(g.name, g.lastname)
 
 
 """New User Registration"""
