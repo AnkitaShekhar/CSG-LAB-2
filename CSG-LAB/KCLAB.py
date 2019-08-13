@@ -173,7 +173,7 @@ def router_admin():
 
             """Telnet into router"""
             obj_tel = telnet_ssh.tel_ssh(list(cred))
-            response = obj_tel.tel_router(request.form['userid'], request.form['assignid'])
+            response = obj_tel.tel_router(request.form['assignid'], request.form['userid'])
 
             if response == 0:
                 print("Updating database with User, Assign Date, Release Date")
@@ -228,7 +228,7 @@ def router_admin():
             print(ipdata)
 
             Obj_Router = telnet_ssh.tel_ssh(user)
-            response = Obj_Router.rel_router_switch(user, request.form['assignid'])
+            response = Obj_Router.rel_router_switch(request.form['assignid'], user[0] )
             print(response)
 
             if response == 0:
